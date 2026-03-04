@@ -19,26 +19,8 @@ struct HomeView: View {
             
             // content layer
             VStack {
-                HStack {
-                    CircleButtonView(iconName: showPortfolio ? "plus" : "info")
-                        .background(
-                            CircleButtonAnimationView(animate: $showPortfolio)
-                        )
-                    Spacer()
-                    Text(showPortfolio ? "Portfolio" : "Live Prices")
-                        .font(.headline)
-                        .fontWeight(.heavy)
-                        .foregroundStyle(.accent)
-                    Spacer()
-                    CircleButtonView(iconName: "chevron.right")
-                        .rotationEffect(Angle(degrees: showPortfolio ? 180 : 0))
-                        .onTapGesture {
-                            withAnimation(.spring) {
-                                showPortfolio.toggle()
-                            }
-                        }
-                }
-                .padding(.horizontal)
+                homeHeader
+                
                 Spacer()
             }
         }
@@ -49,5 +31,30 @@ struct HomeView: View {
     NavigationStack {
         HomeView()
             .toolbar(.hidden)
+    }
+}
+
+private extension HomeView {
+    var homeHeader: some View {
+        HStack {
+            CircleButtonView(iconName: showPortfolio ? "plus" : "info")
+                .background(
+                    CircleButtonAnimationView(animate: $showPortfolio)
+                )
+            Spacer()
+            Text(showPortfolio ? "Portfolio" : "Live Prices")
+                .font(.headline)
+                .fontWeight(.heavy)
+                .foregroundStyle(.accent)
+            Spacer()
+            CircleButtonView(iconName: "chevron.right")
+                .rotationEffect(Angle(degrees: showPortfolio ? 180 : 0))
+                .onTapGesture {
+                    withAnimation(.spring) {
+                        showPortfolio.toggle()
+                    }
+                }
+        }
+        .padding(.horizontal)
     }
 }
